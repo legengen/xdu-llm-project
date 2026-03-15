@@ -59,7 +59,6 @@
 ## 4. 测试用例选择
 本项目从 DataRaceBench 中选取了少量代表性 benchmark 进行小型实验，包含 **有 data race** 和 **无 data race** 两类程序。
 
-### 4.1 选定 benchmark
 ```text
 DRB001-antidep1-orig-yes.c
 DRB005-indirectaccess1-orig-yes.c
@@ -74,3 +73,47 @@ DRB059-lastprivate-orig-no.c
 DRB065-pireduction-orig-no.c
 DRB108-atomic-orig-no.c
 ```
+## 5. 项目结构
+
+本项目仓库结构如下：
+
+```text
+datarace-llm-project/
+├── README.md
+├── benchmark_subset/
+│   ├── selected_cases.md
+│   └── cases/
+├── prompts/
+│   ├── prompt_A.txt
+│   └── prompt_B.txt
+├── results/
+│   ├── tsan_results.csv
+│   ├── llm_results.csv
+│   └── metrics_summary.csv
+└── docs/
+    ├── topic_ppt.pdf
+    ├── final_ppt.pdf
+    └── report.pdf
+```
+
+各目录和文件说明如下：
+
+- **README.md**
+  项目的总体说明文件，包括研究背景、实验目标、运行方式、结果说明等内容。
+
+- **benchmark_subset/**
+  存放本项目选取的 DataRaceBench 测试用例。
+  - **selected_cases.md**：每个测试用例的详细介绍，包括错误类型和选择原因。
+  - **cases/**：从 DataRaceBench 中复制出的源代码文件。
+
+- **prompts/**
+  存放 LLM 检测实验中使用的 prompt。
+  - **prompt_A.txt**：基础版 prompt。
+  - **prompt_B.txt**：改进版或分步骤分析 prompt。
+
+- **results/**
+  存放实验结果文件。
+
+- **docs/**
+  存放课程作业相关文档。
+
