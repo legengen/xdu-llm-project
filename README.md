@@ -84,8 +84,10 @@ datarace-llm-project/
 │   ├── selected_cases.md
 │   └── cases/
 ├── prompts/
-│   ├── prompt_A.txt
-│   └── prompt_B.txt
+│   ├── README.md
+│   ├── prompt_A.txt          # 论文 BP1：S1 二分类 yes/no
+│   ├── prompt_B_step1.txt    # 论文 AP2 第一步：数据依赖分析
+│   └── prompt_B_step2.txt    # 论文 AP2 第二步：基于 Step1 判断 yes/no
 ├── results/
 │   ├── tsan_results.csv
 │   ├── llm_results.csv
@@ -107,9 +109,9 @@ datarace-llm-project/
   - **cases/**：从 DataRaceBench 中复制出的源代码文件。
 
 - **prompts/**
-  存放 LLM 检测实验中使用的 prompt。
-  - **prompt_A.txt**：基础版 prompt。
-  - **prompt_B.txt**：改进版或分步骤分析 prompt。
+  存放 LLM 检测实验中使用的 prompt（详见 `prompts/README.md`）。
+  - **prompt_A.txt**：对应论文 **BP1**，仅判断是否存在 data race（S1），首行输出 `yes`/`no`。
+  - **prompt_B_step1.txt** + **prompt_B_step2.txt**：对应论文 **AP2**，先依赖分析再判断 race，通常比单次复杂 prompt 更稳。
 
 - **results/**
   存放实验结果文件。

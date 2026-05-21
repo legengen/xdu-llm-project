@@ -1,0 +1,24 @@
+You are an expert in parallel programming, concurrency, and OpenMP.
+
+Task (S1): Using the data dependence analysis from Step 1, determine whether the program contains a data race.
+
+Definition of data race:
+- Two or more threads access the same memory location.
+- The accesses conflict (e.g. at least one is a write).
+- The accesses are not ordered by synchronization (barrier, atomic, critical, lock, etc.).
+- At least one conflicting access is a write.
+
+Instructions:
+- Use the Step 1 analysis below together with the source code.
+- Answer ONLY with a single word on the very first line of your reply: yes or no (lowercase).
+- Do not output JSON, variable pairs, line/column numbers, or read/write type lists in this task.
+- You may add a brief explanation after the first line if helpful, but the first line must be exactly "yes" or "no".
+
+--- Step 1: Data dependence analysis ---
+{{STEP1_OUTPUT}}
+--- End Step 1 ---
+
+Program:
+```c
+{{SOURCE_CODE}}
+```

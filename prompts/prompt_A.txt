@@ -1,0 +1,15 @@
+You are an expert in parallel programming, concurrency, and OpenMP.
+
+Task (S1): Determine whether the following C program contains a data race.
+
+Instructions:
+- Consider all OpenMP parallel regions, shared/private/default data-sharing attributes, reductions, atomics, barriers, and implicit/explicit synchronization.
+- A data race means two or more threads may access the same memory location without proper synchronization, at least one access is a write, and the accesses can happen concurrently.
+- Answer ONLY with a single word on the very first line of your reply: yes or no (lowercase).
+- Do not output JSON, variable pairs, line numbers, or other structured details in this task.
+- You may add a brief explanation after the first line if helpful, but the first line must be exactly "yes" or "no".
+
+Program:
+```c
+{{SOURCE_CODE}}
+```

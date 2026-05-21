@@ -1,0 +1,16 @@
+You are an expert in parallel programming, concurrency, and OpenMP.
+
+Task: Perform data dependence analysis on the following OpenMP C program. This is Step 1 of a two-step data race check (paper AP2).
+
+Instructions:
+- Identify parallel regions (#pragma omp parallel, for, sections, tasks, etc.) and which variables are shared vs private.
+- List memory locations that may be accessed by more than one thread.
+- For each conflicting access pattern, note read (R) vs write (W) and whether OpenMP clauses or directives (e.g. reduction, atomic, critical, barrier, firstprivate, lastprivate) prevent concurrent conflicting access.
+- Describe loop-carried or cross-iteration dependencies if relevant.
+- Do NOT give the final yes/no data race verdict in this step.
+- Keep the analysis concise but concrete (variable names, relevant lines).
+
+Program:
+```c
+{{SOURCE_CODE}}
+```
