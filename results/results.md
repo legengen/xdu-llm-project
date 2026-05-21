@@ -81,3 +81,31 @@
 - 是否存在误报
 
 后续在 `metrics_summary.csv` 中，我们基于这些结果进一步计算 Accuracy、Precision、Recall 和 F1-score。
+
+---
+
+## LLM 实验结果
+
+### 文件
+
+| 文件 | 说明 |
+|------|------|
+| `llm_results.csv` | 每条 benchmark 的 ground truth、模型预测、是否正确 |
+| `metrics_summary.csv` | 按 model + prompt 汇总的 TP/FP/TN/FN 与 Accuracy/Precision/Recall/F1 |
+| `llm_<model>_<prompt>.md` | 该次实验的分用例说明与原始输出归档 |
+
+### `llm_results.csv` 字段说明
+
+- **model**：使用的 LLM（如 `claude-sonnet-4.5`）
+- **prompt**：`prompt_A` / `prompt_B` 等
+- **filename**：测试用例文件名
+- **ground_truth**：由文件名 `-yes` / `-no` 得到（`yes` / `no`）
+- **prediction**：模型最终判定（以 Summary 表或明确最终结论为准）
+- **correct**：`prediction` 是否与 `ground_truth` 一致
+- **notes**：漏报/误报原因、自我修正等备注
+
+### 已完成的实验
+
+| 模型 | Prompt | 报告 | F1 |
+|------|--------|------|-----|
+| Claude Sonnet 4.5 | prompt_A (BP1) | [llm_claude_sonnet_4.5_prompt_A.md](llm_claude_sonnet_4.5_prompt_A.md) | 0.727 |

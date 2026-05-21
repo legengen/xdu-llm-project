@@ -89,9 +89,10 @@ datarace-llm-project/
 │   ├── prompt_B_step1.txt    # 论文 AP2 第一步：数据依赖分析
 │   └── prompt_B_step2.txt    # 论文 AP2 第二步：基于 Step1 判断 yes/no
 ├── results/
-│   ├── tsan_results.csv
+│   ├── tsan-clang.csv
 │   ├── llm_results.csv
-│   └── metrics_summary.csv
+│   ├── metrics_summary.csv
+│   └── llm_claude_sonnet_4.5_prompt_A.md
 └── docs/
     ├── topic_ppt.pdf
     ├── final_ppt.pdf

@@ -1,0 +1,13 @@
+model,prompt,filename,ground_truth,prediction,correct,notes
+claude-sonnet-4.5,prompt_A,DRB001-antidep1-orig-yes.c,yes,no,false,误判为无竞态；认为各迭代写位置不重叠
+claude-sonnet-4.5,prompt_A,DRB005-indirectaccess1-orig-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_A,DRB009-lastprivatemissing-orig-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_A,DRB013-nowait-orig-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_A,DRB022-reductionmissing-var-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_A,DRB073-doall2-orig-yes.c,yes,no,false,漏报；认为各行由不同线程访问无重叠
+claude-sonnet-4.5,prompt_A,DRB045-doall1-orig-no.c,no,no,true,初判 yes 后改判 no
+claude-sonnet-4.5,prompt_A,DRB048-firstprivate-orig-no.c,no,no,true,
+claude-sonnet-4.5,prompt_A,DRB051-getthreadnum-orig-no.c,no,yes,false,误报；认为 numThreads 存在竞态
+claude-sonnet-4.5,prompt_A,DRB059-lastprivate-orig-no.c,no,no,true,初判 yes 后改判 no
+claude-sonnet-4.5,prompt_A,DRB065-pireduction-orig-no.c,no,no,true,
+claude-sonnet-4.5,prompt_A,DRB108-atomic-orig-no.c,no,no,true,
