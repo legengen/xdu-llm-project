@@ -11,3 +11,15 @@ claude-sonnet-4.5,prompt_A,DRB051-getthreadnum-orig-no.c,no,yes,false,误报；�
 claude-sonnet-4.5,prompt_A,DRB059-lastprivate-orig-no.c,no,no,true,初判 yes 后改判 no
 claude-sonnet-4.5,prompt_A,DRB065-pireduction-orig-no.c,no,no,true,
 claude-sonnet-4.5,prompt_A,DRB108-atomic-orig-no.c,no,no,true,
+claude-sonnet-4.5,prompt_B,DRB001-antidep1-orig-yes.c,yes,yes,true,AP2：Step1 识别跨迭代 R/W 后 Step2 判 yes；Prompt A 漏报
+claude-sonnet-4.5,prompt_B,DRB005-indirectaccess1-orig-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_B,DRB009-lastprivatemissing-orig-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_B,DRB013-nowait-orig-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_B,DRB022-reductionmissing-var-yes.c,yes,yes,true,
+claude-sonnet-4.5,prompt_B,DRB073-doall2-orig-yes.c,yes,no,false,漏报；Step1/2 均认为各行独立无竞态
+claude-sonnet-4.5,prompt_B,DRB045-doall1-orig-no.c,no,no,true,
+claude-sonnet-4.5,prompt_B,DRB048-firstprivate-orig-no.c,no,no,true,
+claude-sonnet-4.5,prompt_B,DRB051-getthreadnum-orig-no.c,no,no,true,修正 Prompt A 误报；Step2 认为隐式 barrier 同步
+claude-sonnet-4.5,prompt_B,DRB059-lastprivate-orig-no.c,no,no,true,
+claude-sonnet-4.5,prompt_B,DRB065-pireduction-orig-no.c,no,no,true,
+claude-sonnet-4.5,prompt_B,DRB108-atomic-orig-no.c,no,no,true,

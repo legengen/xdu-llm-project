@@ -92,7 +92,10 @@ datarace-llm-project/
 │   ├── tsan-clang.csv
 │   ├── llm_results.csv
 │   ├── metrics_summary.csv
-│   └── llm_claude_sonnet_4.5_prompt_A.md
+│   ├── llm_claude_sonnet_4.5_prompt_A.md
+│   ├── llm_claude_sonnet_4.5_prompt_B.md
+│   ├── llm_claude_sonnet_4.5_prompt_B_step1.md
+│   └── llm_claude_sonnet_4.5_prompt_B_step2_summary.md
 └── docs/
     ├── topic_ppt.pdf
     ├── final_ppt.pdf

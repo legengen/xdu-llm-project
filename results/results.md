@@ -109,3 +109,4 @@
 | 模型 | Prompt | 报告 | F1 |
 |------|--------|------|-----|
 | Claude Sonnet 4.5 | prompt_A (BP1) | [llm_claude_sonnet_4.5_prompt_A.md](llm_claude_sonnet_4.5_prompt_A.md) | 0.727 |
+| Claude Sonnet 4.5 | prompt_B (AP2) | [llm_claude_sonnet_4.5_prompt_B.md](llm_claude_sonnet_4.5_prompt_B.md) | 0.909 |

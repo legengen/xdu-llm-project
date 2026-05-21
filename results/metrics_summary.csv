@@ -1,2 +1,3 @@
 model,prompt,n_cases,tp,fp,tn,fn,accuracy,precision,recall,f1
 claude-sonnet-4.5,prompt_A,12,4,1,5,2,0.750,0.800,0.667,0.727
+claude-sonnet-4.5,prompt_B,12,5,0,6,1,0.917,1.000,0.833,0.909
