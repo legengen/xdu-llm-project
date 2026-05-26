@@ -30,8 +30,8 @@
   某些 benchmark 有可变参数时，这里会显示具体数值；如果该程序没有可变数据规模，则显示 `N/A`。
 
 - **races**  
-  工具在该次运行中报告的数据竞争数量。  
-  对于 ThreadSanitizer，这一列表示检测到的 race 数目。
+  **TSan 的检测输出**：该次运行报告的数据竞争条数（`0` = 未报 race，`>0` = 检出）。  
+  与 **`haverace`（标准答案）** 对比才能算 TP/FP/FN/TN；二者不可混用。
 
 - **elapsed-time(seconds)**  
   本次实验运行耗时，单位为秒。
@@ -74,13 +74,11 @@
 
 ### 说明
 
-在本项目中，`haverace` 是 DataRaceBench 提供的标准答案，`races` 是 ThreadSanitizer 的检测输出。  
-因此我们可以将两者进行比较，用于统计：
-- 是否检测成功
-- 是否存在漏报
-- 是否存在误报
+在本项目中，`haverace` 是 DataRaceBench 提供的标准答案，`races` 是 ThreadSanitizer 的检测输出。
 
-后续在 `metrics_summary.csv` 中，我们基于这些结果进一步计算 Accuracy、Precision、Recall 和 F1-score。
+**TSan 结果来源**：在官方仓库 `dataracebench/` 中配置 `list.def`（12 用例）与 `tool.def`（`tsan-clang`），运行 `./check-data-races.sh --customize c` 后，将 `dataracebench/results/tsan-clang.csv` 复制到本目录（可用 `dataracebench/scripts/copy_tsan_results_to_xdu.sh`）。Docker 方式见 `dataracebench/docker/README.md` 与 `dataracebench/scripts/run_subset_tsan_docker.sh`。
+
+因此我们可以将 `races` 与 `haverace`、以及 `llm_results.csv` 比较，用于统计是否检测成功、漏报与误报。汇总指标见 `metrics_summary.csv`。
 
 ---
 
@@ -110,3 +108,30 @@
 |------|--------|------|-----|
 | Claude Sonnet 4.5 | prompt_A (BP1) | [llm_claude_sonnet_4.5_prompt_A.md](llm_claude_sonnet_4.5_prompt_A.md) | 0.727 |
 | Claude Sonnet 4.5 | prompt_B (AP2) | [llm_claude_sonnet_4.5_prompt_B.md](llm_claude_sonnet_4.5_prompt_B.md) | 0.909 |
+| TSan (tsan-clang) | 动态检测（官方 DRB 脚本） | `tsan-clang.csv` | 0.714 |
+
+### LLM 与 TSan 对比
+
+均在 **同一 Ground truth**（文件名 `-yes`/`-no`）下计算，见 `metrics_summary.csv`：
+
+| 方法 | F1 | Recall | 说明 |
+|------|-----|--------|------|
+| TSan | 0.714 | 0.833 | 官方 `check-data-races.sh --customize c`，12 例子集 |
+| LLM Prompt B | 0.909 | 0.833 | Claude Sonnet 4.5 |
+| LLM Prompt A | 0.727 | 0.667 | Claude Sonnet 4.5 |
+
+TSan 漏报 DRB001（`races=0`）；误报 DRB059/065/108。LLM Prompt B 漏报 DRB073。
+
+### TSan 误报说明（FP）
+
+在本子集中，**DRB059、DRB065、DRB108** 的 ground truth 为 **no**（无用户级 data race），但 TSan 的 `races>0`，属于**误报**。详细日志见官方仓库 `dataracebench/results/log/*.tsan-clang.log`。
+
+**共性原因**：TSan 基于 pthread 层面的 happens-before 分析，**不能完整理解 OpenMP 语义**（`atomic`、`reduction`、`lastprivate`、并行区结束时的隐式 barrier）。编译器与 `libomp` 生成的归约、收尾代码在 TSan 看来像「未同步的并发读写」，因而报警；按 OpenMP 标准这些访问仍有同步保证。
+
+| 用例 | OpenMP 保护 | TSan 看到的现象 |
+|------|-------------|-----------------|
+| DRB108 | `#pragma omp atomic` | 工作线程 atomic 写 `a` 时，主线程已在 `printf` 中读 `a` |
+| DRB059 | `lastprivate(x)` | 并行循环未完全结束时，主线程在 `printf` 读 `x` |
+| DRB065 | `reduction(+:pi)` | 归约函数 / `__kmp_hyper_barrier_gather` 内线程间读写临时缓冲区 |
+
+**结论**：上述误报**不代表 benchmark 写错**，而是 TSan 与 OpenMP 组合时的已知局限；与 LLM 对比时，应把 FP 单独说明，不宜把 TSan 输出当作标准答案。DataRaceBench 论文对各工具的 FP/FN 亦有类似讨论。

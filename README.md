@@ -118,7 +118,7 @@ datarace-llm-project/
   - **prompt_B_step1.txt** + **prompt_B_step2.txt**：对应论文 **AP2**，先依赖分析再判断 race，通常比单次复杂 prompt 更稳。
 
 - **results/**
-  存放实验结果文件。
+  存放实验结果文件。`tsan-clang.csv` 由官方 `dataracebench` 运行 TSan 后复制而来（见 `dataracebench/scripts/copy_tsan_results_to_xdu.sh`）。
 
 - **docs/**
   存放课程作业相关文档。
