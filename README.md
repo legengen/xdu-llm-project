@@ -97,9 +97,10 @@ datarace-llm-project/
 │   ├── llm_claude_sonnet_4.5_prompt_B_step1.md
 │   └── llm_claude_sonnet_4.5_prompt_B_step2_summary.md
 └── docs/
-    ├── topic_ppt.pdf
-    ├── final_ppt.pdf
-    └── report.pdf
+    ├── README.md
+    ├── topic_ppt.placeholder.md    # → 替换为 topic_ppt.pdf
+    ├── final_ppt.placeholder.md    # → 替换为 final_ppt.pdf
+    └── report.placeholder.md       # → 替换为 report.pdf
 ```
 
 各目录和文件说明如下：
@@ -121,5 +122,5 @@ datarace-llm-project/
   存放实验结果文件。`tsan-clang.csv` 由官方 `dataracebench` 运行 TSan 后复制而来（见 `dataracebench/scripts/copy_tsan_results_to_xdu.sh`）。
 
 - **docs/**
-  存放课程作业相关文档。
+  存放课程作业相关文档（当前为占位 md，正式交付为 `topic_ppt.pdf`、`final_ppt.pdf`、`report.pdf`，见 `docs/README.md`）。
 
